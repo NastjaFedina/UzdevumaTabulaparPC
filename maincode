@@ -21,7 +21,7 @@ class DatoruSastavdalas:
         self.komponents.append(PCKomponents(veids, modelis, cena))
 
     def izvade_konsoli(self):
-        """Izvada tabulu konsolē ar tabulate (skaisti formatētu)"""
+        """Izvada tabulu konsolē ar tabulate"""
         data = [[k.veids, k.modelis, f"{k.cena:.2f} EUR"] for k in self.komponents]
         print(tabulate(data, headers=["Veids", "Modelis", "Cena"], tablefmt="grid"))
 if name == "main":
