@@ -1,0 +1,42 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from tabulate import tabulate
+
+class PCKomponents:
+    """Klase, kas pārstāv vienu PC komponenti"""
+    def init(self, veids, modelis, cena):
+        self.veids = veids.strip()
+        self.modelis = modelis.strip()
+        self.cena = float(cena.replace(',', '.')) 
+
+    def str(self):
+        return f"{self.veids}: {self.modelis} - {self.cena:.2f} EUR"
+
+class DatoruSastavdalas:
+    """Klase, kas pārvalda komponentu sarakstu"""
+    def init(self):
+        self.komponents = []
+
+    def pievienot_komponenti(self, veids, modelis, cena):
+        self.komponents.append(PCKomponents(veids, modelis, cena))
+
+    def izvade_konsoli(self):
+        """Izvada tabulu konsolē ar tabulate (skaisti formatētu)"""
+        data = [[k.veids, k.modelis, f"{k.cena:.2f} EUR"] for k in self.komponents]
+        print(tabulate(data, headers=["Veids", "Modelis", "Cena"], tablefmt="grid"))
+if name == "main":
+    datora_sastavdalas = DatoruSastavdalas()
+
+    
+    datora_sastavdalas.pievienot_komponenti("RAM", "Corsair Vengeance LPX 16GB", "99,99")
+    datora_sastavdalas.pievienot_komponenti("GPU", "Gigabyte GeForce GT 710 2GB", "75,50")
+    datora_sastavdalas.pievienot_komponenti("CPU", "AMD Ryzen 7 5800X 3,8GHz", "657,80")
+
+    print("Personālā datora sastāvdaļu tabula:\n")
+    datora_sastavdalas.izvade_konsoli()
+    datora_sastavdalas.saglabat_teksta_datne()
+    
+    print("\nGrafiskā izvade (loga atvēršana):")
+    datora_sastavdalas.grafiska_izvade()
+    
+    print(f"\nKopējā komponentu cena: {datora_sastavdalas.kop_eja_cena():.2f} EUR")
